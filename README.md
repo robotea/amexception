@@ -111,13 +111,13 @@ make
 ./TEST_AMExeption
 ```
 
-## Licencing
+## License
 
-This library is under GNU GPL v3 licence. If you need business licence, don't hesitate to contact [me](mailto:zdenek.skulinek\@robotea.com\?subject\=Licence%20for%20AMException).
+This library is under GNU GPL v3 license. If you need business license, don't hesitate to contact [me](mailto:zdenek.skulinek\@robotea.com\?subject\=License%20for%20AMException).
 
 ## Contribute
 
-Please contact [me](mailto:zdenek.skulinek\@robotea.com\?subject\=Licence%20for%20AMException).
+Please contact [me](mailto:zdenek.skulinek\@robotea.com\?subject\=License%20for%20AMException).
 
 ## Dependencies
 
