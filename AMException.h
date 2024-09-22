@@ -1,3 +1,10 @@
+/**
+ * @file: AMException.h
+ * Cascaded exception with localization.
+ *
+ * @author Robotea technologies s.r.o.
+ */
+
 #ifndef __AMEXCEPTION_H__
 #define __AMEXCEPTION_H__
 
