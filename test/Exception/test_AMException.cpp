@@ -1,34 +1,58 @@
-# AMException - cascaded exception with localization.
+#include "../../AMException.h"
+#include "gtest/gtest.h"
 
-Typical error is cascaded. Let's imagine that you have application for editing documents. Than, you may want present IO error to user if occured. For example:
+using namespace std;
+using namespace AMCore;
 
-- Unable save document
-- *Because*
-- Unable write file
-- *Because*
-- Disk is full
+const constexpr char* g_strings[][2] = {
+    {
+        "simple",
+        "Simple"
+    },
+    {
+        "enhanced",
+        "Enhanced"
+    },
+    {
+        "toplevel",
+        "Top-Level"
+    },
+};
 
-## Usage
+TEST(AMException, BasicTest)
+{
+    AMLString se0 = _(g_strings[0][0]);
+    AMLString se1 = _(g_strings[1][0]);
+    AMLString se2 = _(g_strings[2][0]);
 
-Let's have this table. First word is an original string, second is a "translated" string.
+    _T_AM_StringList* list = _T_AM_StringList::GetStringTable("default");
+    EXPECT_NE(list, nullptr);
+    _T_AM_StringItemBase* p = list->_M_first_item;
+    EXPECT_NE(p, nullptr);
+    p = p->_M_next; // skip empty string
+    p->setTranslatedString(g_strings[1][1]); // Enhanced is first
+    p = p->_M_next;
+    p->setTranslatedString(g_strings[0][1]);
+    p = p->_M_next;
+    p->setTranslatedString(g_strings[2][1]);
 
-    #include "amexception/AMException.h"
+    try
+    {
+        throw AMException(_(g_strings[0][0]));
+        FAIL() << "This line must not be reached since an exception is thrown";
+    }
+    catch(AMException e)
+    {
+        EXPECT_STREQ(g_strings[0][1], e.what() );
+    }
+    catch (...)
+    {
+        FAIL() << "Unexpected exception";
+    }
+}
 
-    const constexpr char* g_strings[][2] = {
-        {
-            "simple",
-            "Simple"
-        },
-        {
-            "enhanced",
-            "Enhanced"
-        },
-        {
-            "toplevel",
-            "Top-Level"
-        },
-    };
-
+TEST(AMException, CascadedTest)
+{
     try
     {
         try
@@ -79,47 +103,10 @@ Let's have this table. First word is an original string, second is a "translated
     {
         FAIL() << "Unexpected exception";
     }
+}
 
-## Documetation
-
-There are doxygen generated documentation [here on libandromeda.org](http://libandromeda.org/AMException/latest/).
-
-## Building AMException
-
-### Getting sources
-
-```bash
-git submodule update
-```
-
-### Compiling
-
-```bash
-
-mkdir cmake-build-debug
-
-cd cmake-build-debug
-
-cmake ..
-
-make
-```
-
-### Single test (not necessary)
-
-```bash
-./TEST_AMExeption
-```
-
-## Licencing
-
-This library is under GNU GPL v3 licence. If you need business licence, don't hesitate to contact [me](mailto:zdenek.skulinek@robotea.com?subject=Licence for AMException).
-
-## Contribute
-
-Please contact [me](mailto:zdenek.skulinek@robotea.com?subject=Licence for AMException).
-
-## Dependencies
-
-1. [Google test](https://github.com/google/googletest.git)
-2. [AMLString](https://github.com/robotea/amlstring.git)
+int main(int argc, char **argv)
+{
+     ::testing::InitGoogleTest(&argc, argv);
+     return RUN_ALL_TESTS();
+}

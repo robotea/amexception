@@ -1,0 +1,3 @@
+// the configured options and settings for Tutorial
+#define AMException_VERSION_MAJOR @AMException_VERSION_MAJOR@
+#define AMException_VERSION_MINOR @AMException_VERSION_MINOR@

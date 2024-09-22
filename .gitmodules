@@ -1,0 +1,6 @@
+[submodule "dependencies/googletest"]
+	path = dependencies/googletest
+	url = https://github.com/google/googletest.git
+[submodule "dependencies/amlstring"]
+	path = dependencies/amlstring
+	url = https://github.com/robotea/amlstring.git
