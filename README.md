@@ -82,7 +82,7 @@ Let's have this table. First word is an original string, second is a "translated
 
 ## Documetation
 
-There are doxygen generated documentation [here on libandromeda.org](http://libandromeda.org/AMException/latest/).
+There are doxygen generated documentation [here on libandromeda.org](http://libandromeda.org/amexception/latest/).
 
 ## Building AMException
 
